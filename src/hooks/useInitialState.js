@@ -8,10 +8,13 @@ const useInitialState = () => {
 	const [state, setState] = useState(initialState);
 
 	const addToCart = (payload) => {
-		setState({
-			...state,
-			cart: [...state.cart, payload]
-		});
+		const filtro = state.cart.filter( data => data.id == payload.id)
+		if (filtro.length == 0) {
+			setState({
+				...state,
+				cart: [...state.cart, payload]
+			});
+		}
 	};
 
 	const removeFromCart = (payload) => {

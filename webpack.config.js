@@ -9,11 +9,14 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/'
 	},
+	mode: 'development',
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		alias: {
 			'@components': path.resolve(__dirname, 'src/components/'),
 			'@containers': path.resolve(__dirname, 'src/containers/'),
+			'@context': path.resolve(__dirname, 'src/context/'),
+			'@hooks': path.resolve(__dirname, 'src/hooks/'),
 			'@pages': path.resolve(__dirname, 'src/pages/'),
 			'@routes': path.resolve(__dirname, 'src/routes/'),
 			'@styles': path.resolve(__dirname, 'src/styles/'),
@@ -25,7 +28,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /node_modules/,
+				exclude: path.resolve(__dirname, 'node_modules'),
 				use: {
 					loader: 'babel-loader'
 				}
