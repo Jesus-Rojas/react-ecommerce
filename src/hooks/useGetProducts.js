@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-const useGetProducts = (API) => {
+const useGetProducts = () => {
 	const [products, setProducts] = useState([]);
 
 	useEffect(async () => {
-		const { data } = await axios(API);
+		const { data } = await axios(`${process.env.API}/products`);
 		setProducts(data);
 	}, []);
 

@@ -1,19 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name][contenthash].js',
-		assetModuleFilename: 'assets/[hash][ext][query]',
-		clean: true,
+		filename: 'bundle.js',
 	},
-	mode: 'production',
+	mode: 'development',
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		alias: {
@@ -69,11 +65,12 @@ module.exports = {
 		}),
 		new Dotenv(),
 	],
-	optimization: {
-		minimize: true,
-		minimizer: [
-			new CssMinimizerPlugin(),
-			new TerserPlugin(),
-		],
+	devServer: {
+		historyApiFallback: true,
+		compress: true,
+		static: {
+			directory: path.join(__dirname, 'public'),
+		},
+		port: 3000,
 	}
 }
